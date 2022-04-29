@@ -7,13 +7,14 @@ public class PlayerInput : MonoBehaviour
 
 
     CharacterMover characterMover;
+    Animator animator;
 
     bool isGrounded = false;
 
     private void Start()
     {
         characterMover = GetComponent<CharacterMover>();
-
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -29,6 +30,19 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetAxisRaw("Vertical") > 0 && isGrounded)
         {
             characterMover.Jump();
+        }
+
+        if (Input.GetAxisRaw("Horizontal") > 0)
+        {
+            animator.SetBool("isWalking", true);
+            transform.localScale = new Vector3(1, 1, 1);
+        } else if (Input.GetAxisRaw("Horizontal") < 0)
+        {
+            animator.SetBool("isWalking", true);
+            transform.localScale = new Vector3(-1, 1, 1);
+        } else
+        {
+            animator.SetBool("isWalking", false);
         }
     }
 

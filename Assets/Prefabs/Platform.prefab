@@ -71,12 +71,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0854db8f836880b438e4d914de73c18e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e1cdf45d27807fe43b1e46c953147032, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -113,6 +113,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22260336739955028}
+  - {fileID: 7386424518444279671}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -129,7 +130,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlatformPrefab: {fileID: 22260337348537056}
-  FallenSprite: {fileID: 21300000, guid: 209e56280334b7244986e98e9d89a9cb, type: 3}
+  FallenSprite: {fileID: 21300000, guid: 9ac698b3ff1677c4d9f9b3f84f4d1454, type: 3}
+  MinBoxSize: 0.3
+  MinTimeToFall: 0.2
+  MaxTimeToFall: 1
 --- !u!61 &1398436472
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.136186}
+  m_Offset: {x: -0.032471895, y: -0.136186}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -154,7 +158,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.727628}
+  m_Size: {x: 0.9350562, y: 0.727628}
   m_EdgeRadius: 0
 --- !u!50 &802982702456070774
 Rigidbody2D:
@@ -177,3 +181,65 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1001 &8952937365450559710
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 22260337348537071}
+    m_Modifications:
+    - target: {fileID: 1927225009980045225, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927225009980045225, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927225009980045225, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.158
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927225009980045225, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927225009980045225, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927225009980045225, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927225009980045225, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927225009980045225, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927225009980045225, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927225009980045225, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927225009980045225, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6208546245712277790, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+      propertyPath: m_Name
+      value: Flamable
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+--- !u!4 &7386424518444279671 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1927225009980045225, guid: ac50354fa9a18cd4dbd7b294b0ccc6fc, type: 3}
+  m_PrefabInstance: {fileID: 8952937365450559710}
+  m_PrefabAsset: {fileID: 0}
