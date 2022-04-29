@@ -6,6 +6,7 @@ public class CharacterMover : MonoBehaviour
 {
     public float MaxSpeed = 5f;
     public float MaxJumpHeight = 10f;
+    public float ShadowOffset = 0.4f;
 
     private Vector2 desiredDirection;
     private Rigidbody2D rb;
@@ -22,6 +23,30 @@ public class CharacterMover : MonoBehaviour
 
         rb.velocity = new Vector2(desiredDirection.x * MaxSpeed, rb.velocity.y);
 
+        ShadowCalc();
+    }
+
+    private void ShadowCalc()
+    {
+        RaycastHit2D[] results = Physics2D.RaycastAll(transform.position, Vector2.down);
+
+        Transform shadow = transform.Find("Visuals/Shadow");
+
+        RaycastHit2D hit = results[0];
+        float dist = Mathf.Infinity;
+        foreach (RaycastHit2D rh in results)
+        {
+            if (Vector2.SqrMagnitude((Vector2)this.transform.position - rh.point) < dist)
+            {
+                if (rh.collider == transform.GetComponentInChildren<Collider2D>() || rh.collider.isTrigger)
+                    continue;
+
+                dist = Vector2.SqrMagnitude((Vector2)this.transform.position - rh.point);
+                hit = rh;
+            }
+        }
+
+        shadow.transform.position = new Vector3(shadow.transform.position.x, hit.point.y + ShadowOffset, shadow.transform.position.z);
     }
 
     public void Jump()
