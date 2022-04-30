@@ -9,16 +9,21 @@ public class Platform : MonoBehaviour
 
     public Sprite FallenSprite;
 
+    public Collider2D TopCollider;
+
     public float MinBoxSize = 0.3f;
     public float MinTimeToFall = 0.2f;
-    public float MaxTimeToFall = 1f;
+    public float FallDelay = 1f;
 
     private bool isOqupied = false;
     private bool hasFallen = false;
 
+    private Animator animator;
+
     private void Start()
     {
         platformParent = FindObjectOfType<PlatformParent>().transform;
+        animator = GetComponent<Animator>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -44,16 +49,19 @@ public class Platform : MonoBehaviour
 
     IEnumerator CountdownCorutine()
     {
-        yield return new WaitForSeconds(Random.Range(MinTimeToFall, MaxTimeToFall));
+        yield return new WaitForSeconds(MinTimeToFall);
 
         if (isOqupied)
         {
-            Fall();
+            StartCoroutine(FallCoroutine());
         }
     }
 
-    void Fall()
+    IEnumerator FallCoroutine()
     {
+        animator.SetTrigger("Wiggle");
+        yield return new WaitForSeconds(FallDelay);
+
         if (transform.localScale.x > MinBoxSize)
         {
             GameObject newPlatform = Instantiate(PlatformPrefab, platformParent);
@@ -64,6 +72,8 @@ public class Platform : MonoBehaviour
 
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = FallenSprite;
+
+        animator.SetTrigger("Fall");
 
         hasFallen = true;
     }

@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 8181898780043332200}
   - component: {fileID: 1398436472}
   - component: {fileID: 802982702456070774}
+  - component: {fileID: 4125872310569543385}
   m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
@@ -131,9 +132,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlatformPrefab: {fileID: 22260337348537056}
   FallenSprite: {fileID: 21300000, guid: 9ac698b3ff1677c4d9f9b3f84f4d1454, type: 3}
+  TopCollider: {fileID: 0}
   MinBoxSize: 0.3
-  MinTimeToFall: 0.2
-  MaxTimeToFall: 1
+  MinTimeToFall: 0.3
+  FallDelay: 1
 --- !u!61 &1398436472
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,7 +149,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.032471895, y: -0.136186}
+  m_Offset: {x: -0.032471895, y: -0.14042097}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -158,7 +160,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9350562, y: 0.727628}
+  m_Size: {x: 0.9350562, y: 0.71915805}
   m_EdgeRadius: 0
 --- !u!50 &802982702456070774
 Rigidbody2D:
@@ -181,6 +183,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &4125872310569543385
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22260337348537056}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c9b62aaa464c146468e45f1518d772bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8952937365450559710
 PrefabInstance:
   m_ObjectHideFlags: 0

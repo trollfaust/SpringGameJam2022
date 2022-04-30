@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    public static PlayerInput Instance
+    {
+        get
+        {
+            if (_Instance == null)
+            {
+                _Instance = FindObjectOfType<PlayerInput>();
+            }
 
+            return _Instance;
+        }
+    }
+    private static PlayerInput _Instance;
 
     CharacterMover characterMover;
-    Animator animator;
-
-    bool isGrounded = false;
 
     private void Start()
     {
         characterMover = GetComponent<CharacterMover>();
-        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -27,39 +35,9 @@ public class PlayerInput : MonoBehaviour
                 0
             ));
 
-        if (Input.GetAxisRaw("Vertical") > 0 && isGrounded)
+        if (Input.GetAxisRaw("Vertical") > 0)
         {
             characterMover.Jump();
-        }
-
-        if (Input.GetAxisRaw("Horizontal") > 0)
-        {
-            animator.SetBool("isWalking", true);
-            transform.localScale = new Vector3(1, 1, 1);
-        } else if (Input.GetAxisRaw("Horizontal") < 0)
-        {
-            animator.SetBool("isWalking", true);
-            transform.localScale = new Vector3(-1, 1, 1);
-        } else
-        {
-            animator.SetBool("isWalking", false);
-        }
-    }
-
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && (this.transform.position - collision.transform.position).y > 0)
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            isGrounded = false;
         }
     }
 }
