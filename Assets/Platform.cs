@@ -59,6 +59,7 @@ public class Platform : MonoBehaviour
 
     IEnumerator FallCoroutine()
     {
+        hasFallen = true;
         animator.SetTrigger("Wiggle");
         yield return new WaitForSeconds(FallDelay);
 
@@ -74,7 +75,5 @@ public class Platform : MonoBehaviour
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = FallenSprite;
 
         animator.SetTrigger("Fall");
-
-        hasFallen = true;
     }
 }

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int MaxHealth = 20;
+    public float MaxHealth = 20;
     private float currentHealth;
+
+    private SpriteFlasher spriteFlasher;
 
     private void Start()
     {
+        spriteFlasher = GetComponentInChildren<SpriteFlasher>();
         currentHealth = MaxHealth;
     }
 
@@ -17,11 +20,16 @@ public class Health : MonoBehaviour
         return currentHealth;
     }
 
+    public float GetMaxHealth()
+    {
+        return MaxHealth;
+    }
+
     public void ChangeHealth(float amount)
     {
-        currentHealth += amount;
+        currentHealth = Mathf.Clamp((currentHealth + amount), 0, MaxHealth);
 
-        Debug.Log("TODO: Damage Indicator");
+        spriteFlasher?.Flash();
 
         if (currentHealth <= 0)
         {
