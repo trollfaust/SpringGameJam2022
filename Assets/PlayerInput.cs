@@ -19,15 +19,17 @@ public class PlayerInput : MonoBehaviour
     private static PlayerInput _Instance;
 
     CharacterMover characterMover;
+    Health playerHealth;
 
     private void Start()
     {
         characterMover = GetComponent<CharacterMover>();
+        playerHealth = GetComponent<Health>();
     }
 
     private void Update()
     {
-        if (characterMover == null)
+        if (characterMover == null || playerHealth.IsDead())
             return;
 
         characterMover.SetDesiredDirection(new Vector2(

@@ -24,12 +24,20 @@ public class BackgroundGen : MonoBehaviour
     private void Awake()
     {
         tileConatiner = this.transform;
+        InitTileMap();
+    }
 
+    private void InitTileMap()
+    {
         tileIDs = new byte?[BackgroundTilesWidth, BackgroundTilesHeight];
         activeTiles = new GameObject[BackgroundTilesWidth, BackgroundTilesHeight];
         activeTilesList = new List<GameObject>();
 
+        //Predefine some Tiles
         tileIDs[BackgroundTilesWidth - 5, BackgroundTilesHeight - 3] = 0;
+        tileIDs[3, 13] = 0;
+        tileIDs[5, 21] = 0;
+        tileIDs[BackgroundTilesWidth - 5, 27] = 0;
     }
 
     private void Update()
@@ -39,7 +47,12 @@ public class BackgroundGen : MonoBehaviour
 
     private void UpdateActiveTiles()
     {
-        Vector2Int playerTileCoord = WorldCoordToTileCoord(PlayerInput.Instance.transform.position);
+        Vector2Int playerTileCoord = new Vector2Int(0, 0);
+
+        if (PlayerInput.Instance != null)
+        {
+            playerTileCoord = WorldCoordToTileCoord(PlayerInput.Instance.transform.position);
+        }
 
         List<GameObject> newActiveTilesList = new List<GameObject>();
         foreach (GameObject tileGO in activeTilesList)

@@ -27,6 +27,9 @@ public class Health : MonoBehaviour
 
     public void ChangeHealth(float amount)
     {
+        if (IsDead())
+            return;
+
         currentHealth = Mathf.Clamp((currentHealth + amount), 0, MaxHealth);
 
         spriteFlasher?.Flash();
@@ -39,6 +42,11 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("TODO: Die");
+        GetComponent<Animator>().SetBool("isDead", true);
+    }
+
+    public bool IsDead()
+    {
+        return currentHealth <= 0;
     }
 }

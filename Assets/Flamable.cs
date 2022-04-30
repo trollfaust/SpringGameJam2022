@@ -19,19 +19,22 @@ public class Flamable : MonoBehaviour
 
     List<Flamable> currentCollisionsFlamable = new List<Flamable>();
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         Flamable colliderFlamable = collision.gameObject.GetComponent<Flamable>();
 
         if (colliderFlamable == null)
             return;
 
-        currentCollisionsFlamable.Add(colliderFlamable);
+        if (!currentCollisionsFlamable.Contains(colliderFlamable))
+        {
+            currentCollisionsFlamable.Add(colliderFlamable);
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        OnTriggerEnter2D(collision.collider);
+        OnTriggerStay2D(collision.collider);
     }
 
     private void OnTriggerExit2D(Collider2D collision)

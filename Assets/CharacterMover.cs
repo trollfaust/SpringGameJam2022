@@ -13,6 +13,7 @@ public class CharacterMover : MonoBehaviour
     private Animator animator;
 
     private bool isGrounded;
+    private bool isOnSide;
 
     private void Start()
     {
@@ -74,11 +75,15 @@ public class CharacterMover : MonoBehaviour
 
     public void Jump()
     {
-        if (!isGrounded)
+        if (!isGrounded && !isOnSide)
             return;
 
-        rb.velocity = new Vector2(rb.velocity.x, 1f * MaxJumpHeight);
-        animator.SetTrigger("jump");
+        rb.velocity = new Vector2(rb.velocity.x, (isOnSide ? 0.2f : 1f) * MaxJumpHeight);
+
+        if (!isOnSide)
+        {
+            animator.SetTrigger("jump");
+        }
     }
 
     public void SetDesiredDirection(Vector2 direction)
@@ -88,10 +93,18 @@ public class CharacterMover : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && (this.transform.position - ((Vector3)collision.collider.offset + collision.transform.position)).y > 0)
+        Vector2 closestPoint = collision.collider.ClosestPoint(this.transform.position);
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && ((Vector2)this.transform.position - closestPoint).y > 0)
         {
             isGrounded = true;
             animator.SetBool("isGrounded", true);
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && ((Vector2)this.transform.position - closestPoint).y == 0)
+        {
+            isOnSide = true;
+            animator.SetTrigger("hang");
         }
     }
 
@@ -100,6 +113,7 @@ public class CharacterMover : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = false;
+            isOnSide = false;
             animator.SetBool("isGrounded", false);
         }
     }

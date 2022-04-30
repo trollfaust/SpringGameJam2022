@@ -14,6 +14,7 @@ public class Platform : MonoBehaviour
     public float MinBoxSize = 0.3f;
     public float MinTimeToFall = 0.2f;
     public float FallDelay = 1f;
+    public float DelayToNextFall = 0.5f;
 
     private bool isOqupied = false;
     private bool hasFallen = false;
@@ -35,7 +36,7 @@ public class Platform : MonoBehaviour
 
         if (!hasFallen)
         {
-            StartCoroutine(CountdownCorutine());
+            StartCoroutine(CountdownCoroutine());
         }
     }
 
@@ -47,7 +48,7 @@ public class Platform : MonoBehaviour
         isOqupied = false;
     }
 
-    IEnumerator CountdownCorutine()
+    IEnumerator CountdownCoroutine()
     {
         yield return new WaitForSeconds(MinTimeToFall);
 
@@ -75,5 +76,8 @@ public class Platform : MonoBehaviour
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = FallenSprite;
 
         animator.SetTrigger("Fall");
+
+        yield return new WaitForSeconds(DelayToNextFall);
+        hasFallen = false;
     }
 }
