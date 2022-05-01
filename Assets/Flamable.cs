@@ -9,7 +9,6 @@ public class Flamable : MonoBehaviour
     public GameObject SmokePrefab;
     public GameObject FirePrefab;
 
-    //[HideInInspector]
     public bool IsHot = false;
 
     private bool isGettingHot = false;
@@ -18,6 +17,15 @@ public class Flamable : MonoBehaviour
     private GameObject fireEffect;
 
     List<Flamable> currentCollisionsFlamable = new List<Flamable>();
+
+    CameraLockOn cameraLock;
+    AudioSource audioSource;
+
+    private void Start()
+    {
+        cameraLock = FindObjectOfType<CameraLockOn>();
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -80,6 +88,11 @@ public class Flamable : MonoBehaviour
             StopLighting();
             countdown = 0;
         }
+
+        if (cameraLock.IsEndScreen && audioSource != null)
+        {
+            audioSource.Stop();
+        }
     }
 
     private void StartLighting()
@@ -115,6 +128,8 @@ public class Flamable : MonoBehaviour
             fireEffect.transform.position = this.transform.position;
             StartCoroutine(BurningCoroutine());
         }
+
+        audioSource.Play();
     }
 
     IEnumerator BurningCoroutine()

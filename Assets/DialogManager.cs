@@ -24,10 +24,30 @@ public class DialogManager : MonoBehaviour
     public TMP_Text EndScreenTitle;
     public GameObject Background;
 
+    public GameObject Tutorial;
+
     public void Start()
     {
         HeartUI.SetActive(true);
         EndScreen.SetActive(false);
+
+        if (PlayerPrefs.GetInt("Tutorial", 0) == 0)
+        {
+            Tutorial.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Tutorial.SetActive(false);
+            Time.timeScale = 1;
+        }
+    }
+
+    public void TutorialDone()
+    {
+        Time.timeScale = 1;
+        Tutorial.SetActive(false);
+        PlayerPrefs.SetInt("Tutorial", 1);
     }
 
     public void TriggerEndScreen(bool hasWon)

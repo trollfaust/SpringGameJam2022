@@ -8,10 +8,12 @@ public class Health : MonoBehaviour
     private float currentHealth;
 
     private SpriteFlasher spriteFlasher;
+    private PlayerAudio playerAudio;
 
     private void Start()
     {
         spriteFlasher = GetComponentInChildren<SpriteFlasher>();
+        playerAudio = GetComponent<PlayerAudio>();
         currentHealth = MaxHealth;
     }
 
@@ -32,7 +34,11 @@ public class Health : MonoBehaviour
 
         currentHealth = Mathf.Clamp((currentHealth + amount), 0, MaxHealth);
 
-        spriteFlasher?.Flash();
+        if (amount < 0)
+        {
+            playerAudio.PlayHurtSound();
+            spriteFlasher?.Flash();
+        }
 
         if (currentHealth <= 0)
         {

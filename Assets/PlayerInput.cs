@@ -47,6 +47,11 @@ public class PlayerInput : MonoBehaviour
         {
             characterMover.Jump();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            DialogManager.Instance.TriggerEndScreen(false);
+        }
     }
 
     public void SetPlayerInputActive(bool value)

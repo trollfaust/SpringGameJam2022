@@ -15,10 +15,13 @@ public class CharacterMover : MonoBehaviour
     private bool isGrounded;
     private bool isOnSide;
 
+    private PlayerAudio playerAudio;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        playerAudio = GetComponent<PlayerAudio>();
     }
 
 
@@ -83,6 +86,7 @@ public class CharacterMover : MonoBehaviour
         if (!isOnSide)
         {
             animator.SetTrigger("jump");
+            playerAudio.PlayNormalSound();
         }
     }
 
