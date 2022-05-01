@@ -42,7 +42,18 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
+        StartCoroutine(DeathCoroutine());
+    }
+
+    IEnumerator DeathCoroutine()
+    {
+        PlayerInput.Instance.SetPlayerInputActive(false);
         GetComponent<Animator>().SetBool("isDead", true);
+
+        yield return new WaitForSeconds(2f);
+
+        DialogManager.Instance.TriggerEndScreen(false);
+        Destroy(gameObject);
     }
 
     public bool IsDead()

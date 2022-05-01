@@ -19,18 +19,24 @@ public class PlayerInput : MonoBehaviour
     private static PlayerInput _Instance;
 
     CharacterMover characterMover;
-    Health playerHealth;
+
+    private bool isActive = true;
 
     private void Start()
     {
         characterMover = GetComponent<CharacterMover>();
-        playerHealth = GetComponent<Health>();
     }
 
     private void Update()
     {
-        if (characterMover == null || playerHealth.IsDead())
+        if (characterMover == null)
             return;
+
+        if (!isActive)
+        {
+            characterMover.SetDesiredDirection(Vector2.zero);
+            return;
+        }
 
         characterMover.SetDesiredDirection(new Vector2(
                 Input.GetAxisRaw("Horizontal"),
@@ -41,5 +47,10 @@ public class PlayerInput : MonoBehaviour
         {
             characterMover.Jump();
         }
+    }
+
+    public void SetPlayerInputActive(bool value)
+    {
+        isActive = value;
     }
 }
