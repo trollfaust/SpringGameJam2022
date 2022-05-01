@@ -44,10 +44,12 @@ public class DialogManager : MonoBehaviour
         } else
         {
             title = "You Lost!";
-            Background.SetActive(true);
+            //Background.SetActive(true);
         }
 
         EndScreenTitle.text = title;
+
+        FindObjectOfType<CameraLockOn>().IsEndScreen = true;
     }
 
 }

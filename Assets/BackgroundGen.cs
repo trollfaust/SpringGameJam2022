@@ -49,10 +49,12 @@ public class BackgroundGen : MonoBehaviour
     {
         Vector2Int playerTileCoord = new Vector2Int(0, 0);
 
-        if (PlayerInput.Instance != null)
+        /*if (PlayerInput.Instance != null)
         {
             playerTileCoord = WorldCoordToTileCoord(PlayerInput.Instance.transform.position);
-        }
+        }*/
+
+        playerTileCoord = WorldCoordToTileCoord(Camera.main.transform.position);
 
         List<GameObject> newActiveTilesList = new List<GameObject>();
         foreach (GameObject tileGO in activeTilesList)
